@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:css":	"tailwindcss -i src/css/input.css -o dist/output.css --minify",
+    "build:css": "tailwindcss -i src/css/input.css -o dist/output.css --minify",
     "build": "npm run build:css",
-    "watch:css":	"tailwindcss -i src/css/input.css -o dist/output.css --watch"
+    "watch:css": "tailwindcss -i src/css/input.css -o dist/output.css --watch"
   },
   "repository": {
     "type": "git",
@@ -23,5 +23,8 @@
   "devDependencies": {
     "@tailwindcss/cli": "^4.1.18",
     "tailwindcss": "^4.1.18"
+  },
+  "dependencies": {
+    "api-translator": "^1.1.0"
   }
 }

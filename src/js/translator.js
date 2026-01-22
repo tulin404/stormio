@@ -6,19 +6,53 @@ function changeFlag(value) {
     if (selectedOption !== undefined) {
         img.src = `public/flags/${value}.svg`;
         selectedOption.selected = true;
-    } else  {
+    } else if(selectedOption === undefined) {
         img.src = `public/flags/en.svg`;
         const enOpt = options.find(option => option.value = 'en');
         enOpt.selected = true;
+    };
+};
+
+const allTxtsElements = Array.from(document.querySelectorAll('.translate'));
+const allTxts = allTxtsElements.map(element => element.innerText);
+
+async function translate(lng) {
+    if (localStorage.getItem(lng)) {
+        const cache = JSON.parse(localStorage.getItem(lng));
+        allTxtsElements.forEach((element, index) => {
+            element.innerText = cache[index];
+        });
+    } else {
+        try {
+            const raw = await fetch('/api/translate', {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    text: [...allTxts],
+                    lang: lng
+                })
+            });
+            
+            const data = await raw.json();
+            localStorage.setItem(lng, JSON.stringify(data.translated));
+            allTxtsElements.forEach((text, index) => {
+                text.innerText = data.translated[index];
+            });
+        } catch(error) {
+            console.error(error.message);
+        };
     }
+
+        
 };
 
 export function Translator() {
     return {
         changeFlag(value) {
             return changeFlag(value);
-        }, translate(value) {
-            return translate(value);
+        },
+        translate(lng) {
+            return translate(lng);
         }
     };
 };
