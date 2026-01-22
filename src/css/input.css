@@ -18,8 +18,13 @@
     --color-input: oklch(0.3 0 0);
 };
 
-body > *{
-    @apply py-2 px-[8%] sm:py-4 sm:px-[10%] md:px-[12%] lg:px-[16%];
+* {
+    @apply box-border;
+};
+
+
+body > *:not(#translator){
+    @apply px-[8%] sm:px-[10%] md:px-[12%] lg:px-[16%];
 };
 
 @utility shadow-glow {
@@ -34,3 +39,31 @@ body > *{
 button:hover {
     @apply cursor-pointer;
 };
+
+.ft-select {
+    background-color: var(--color-input) !important;
+    color: var(--color-secondary) !important;
+}
+
+.ft-text {
+    color: var(--color-secondary) !important;
+}
+
+#forecast-container > div {
+    scroll-snap-align: center;
+}
+
+#hourly-forecast::after {
+    content: '';
+    @apply absolute top-2 bottom-2 right-3 w-6 bg-primary blur-xs;
+}
+
+#hourly-forecast::before {
+    content: '';
+    @apply absolute top-2 bottom-2 left-3 w-6 bg-primary blur-sm;
+}
+
+.daily-for-wrapper:not(:last-child)::after {
+    content:'';
+    @apply absolute right-0 left-0 top-full mt-2 h-0.5 rounded-full bg-shadow-brighter
+}

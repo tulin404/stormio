@@ -11,8 +11,8 @@ function toCelsius() {
     });
     tempArray.forEach((el, index) => el.innerText = convertedArray[index]);
     measArray.forEach(meas => {
-        if (meas.innerText === '°C') {
-            meas.innerText = '°F'
+        if (meas.innerText === '°F') {
+            meas.innerText = '°C'
         };
     });
 };
