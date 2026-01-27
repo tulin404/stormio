@@ -5,7 +5,10 @@ export default async function translateHandler(req, res) {
         const {text, lang} = req.body;
 
         const translated = await Promise.all(
-            text.map(element => translate(element, {from: "auto", to: lang}))
+            text.map(async element => {
+                const result = await translate(element, {from: "auto", to: lang});
+                return result.text;
+            })
         );
 
         res.status(200).json({translated});

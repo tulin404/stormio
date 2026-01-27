@@ -40,6 +40,9 @@ async function translate(lng) {
             });
             
             const data = await raw.json();
+            if (!Array.isArray(data.translated)) {
+                throw new Error("API não retornou um array de traduções");
+            }
             localStorage.setItem(lng, JSON.stringify(data.translated));
             allTxtsElements.forEach((text, index) => {
                 text.innerText = data.translated[index];
