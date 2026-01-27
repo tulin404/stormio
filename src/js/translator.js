@@ -40,12 +40,7 @@ async function translate(lng) {
             });
             
             const data = await raw.json();
-            console.log(data);
-            console.log(typeof data)
-            console.log(typeof data.translated)
-            if (!Array.isArray(data.translated)) {
-                throw new Error("API não retornou um array de traduções");
-            }
+            console.log(data)
             localStorage.setItem(lng, JSON.stringify(data.translated));
             allTxtsElements.forEach((text, index) => {
                 text.innerText = data.translated[index];
