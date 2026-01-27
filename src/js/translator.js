@@ -8,7 +8,7 @@ function changeFlag(value) {
         selectedOption.selected = true;
     } else if(selectedOption === undefined) {
         img.src = `public/flags/en.svg`;
-        const enOpt = options.find(option => option.value = 'en');
+        const enOpt = options.find(option => option.value === 'en');
         enOpt.selected = true;
     };
 };
@@ -43,7 +43,7 @@ async function translate(lng) {
             localStorage.setItem(lng, JSON.stringify(data.translated));
             allTxtsElements.forEach((text, index) => {
                 text.innerText = data.translated[index];
-            }).then()
+            })
         } catch(error) {
             console.error(error.message);
         } finally {
