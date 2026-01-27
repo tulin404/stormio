@@ -40,6 +40,8 @@ async function translate(lng) {
             });
             
             const data = await raw.json();
+            console.log(typeOf(data))
+            console.log(typeOf(data.translated))
             if (!Array.isArray(data.translated)) {
                 throw new Error("API não retornou um array de traduções");
             }
