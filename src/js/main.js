@@ -121,7 +121,6 @@ weatherInput.addEventListener('keydown', async (e) => {
         weatherInput.value = '';
         forecastContainer.replaceChildren();
         changeInfo(weatherData);
-        console.log(weatherData);
         translator.changeFlag(localStorage.getItem('lang'));
         translator.translate(localStorage.getItem('lang'));
         if (localStorage.getItem('measure') === 'farenheit') {
@@ -241,7 +240,6 @@ function changeTodaysConditions(firstDay) {
     const textMoonPhase = moonPhaseToText(firstDay.moonphase);
     moonphaseImg.src = `public/misc/${textMoonPhase[1]}.svg`
     moonphase.innerText = textMoonPhase[0];
-    console.log(textMoonPhase)
 };
 
 function changeHourlyForecast (obj) {
@@ -256,7 +254,6 @@ function changeHourlyForecast (obj) {
     };
 
     const timeArr = [...dayZeroFiltered, ...obj.days[1].hours].splice(0, 24);
-    console.log(timeArr);
     timeArr.forEach(hour => {
         const newDiv = document.createElement('div');
         newDiv.classList.add('sm:bg-input', 'rounded-sm', 'sm:px-2', 'sm:py-1', 'flex', 'flex-col', 'justify-between', 'items-center', 'text-center', 'text-xl', 'gap-2')
@@ -289,7 +286,6 @@ function change7DayForecastDays(obj) {
         const dateFormatted = formater.format(date).toString();
         return dateFormatted;
     });
-    console.log(correctArray);
     weekDays.forEach((day, index) => dailyDays[index].innerText = day);
 };
 
@@ -304,14 +300,11 @@ function change7DayForecast(obj) {
 };
 
 function moonPhaseToText(moonphase) {
-  if (moonphase === 0 || moonphase === 1) return ["New Moon", "moon-new"];
-  if (moonphase < 0.25) return ["Waxing Crescent", "moon-waxing-gibbous"];
-  if (moonphase === 0.25) return ["First Quarter", "moon-first-quarter"];
-  if (moonphase < 0.5) return ["Waxing Gibbous", "moon-waxing-gibbous"];
-  if (moonphase === 0.5) return ["Full Moon", "moon-full"];
-  if (moonphase < 0.75) return ["Waning Gibbous", "moon-waning-gibbous"];
-  if (moonphase === 0.75) return ["Last Quarter", "moon-last-quarter"];
-  if (moonphase > 0.75) return ["Waning Crescent", "moon-waning-crescent"];
+    if (moonphase === 0 || moonphase === 1) return ["New Moon", "moon-new"];
+    if (moonphase > 0 && moonphase < 0.25) return ["Waxing Crescent", "moon-waxing-crescent"];
+    if (moonphase >= 0.25 && moonphase < 0.5) return ["First Quarter", "moon-first-quarter"];
+    if (moonphase >= 0.5 && moonphase < 0.75) return ["Full Moon", "moon-full"];
+    if (moonphase >= 0.75 && moonphase < 1) return ["Last Quarter", "moon-last-quarter"];
 };
 
 // AUTOMATIC SEARCH
