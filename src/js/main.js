@@ -312,6 +312,7 @@ function moonPhaseToText(moonphase) {
 async function getCity() {
     const raw = await fetch('/api/ip');
     const ip = await raw.json();
+    console.log(ip)
     return ip.data.city;
 };
 

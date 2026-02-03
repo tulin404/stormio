@@ -12,6 +12,7 @@ export default async function translateHandler(req, res) {
 
         res.status(200).json({translated});
     } catch (error) {
+        console.error(error);
         console.error(error.stack);
         res.status(500).json({ error: "Erro interno no servidor" });
     };
